@@ -1,11 +1,166 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css"><script src="js/script.js" defer></script><title>Campus Life App | Dining</title></head><body><header class="site-header"><div class="container py-3 d-flex flex-wrap justify-content-between align-items-center gap-3">
-<a class="brand" href="index.html">[LOGO] CAMPUS LIFE</a><nav class="main-nav" aria-label="Main navigation">
-<a class="nav-box "  href="index.html">Home</a><a class="nav-box "  href="events.html">Events</a><a class="nav-box active" aria-current="page" href="dining.html">Dining</a><a class="nav-box "  href="studying.html">Studying</a>
-</nav></div></header><main class="container py-4">
-<section class="wire-box mb-4"><h1>Dining</h1><p class="muted">Purpose: Help students find dining locations, hours, menus, and campus food options.</p></section>
-<section class="wire-box mb-4"><h2>Dining Options</h2><form id="dining-search-form" class="row g-2 align-items-end"><div class="col-md-6"><label class="form-label" for="dining-search">Search dining spots</label><input id="dining-search" class="form-control" type="search" placeholder="Search by name or menu"></div><div class="col-md-4"><label class="form-label" for="meal-type">Meal type</label><select id="meal-type" class="form-select"><option value="all">All meals</option><option value="breakfast">Breakfast</option><option value="lunch">Lunch</option><option value="dinner">Dinner</option></select></div><div class="col-md-2"><button class="button-box w-100">Search</button></div></form></section>
-<div id="dining-list" class="row g-3"><div class="col-12 dining-item" data-meals="breakfast lunch"><article class="wire-box d-md-flex justify-content-between align-items-center"><div><h2>Dining Hall</h2><p>Hours • Location • Menu preview: [Add details]</p></div><button class="button-box menu-button" data-title="Dining Hall" type="button">View Menu</button></article></div><div class="col-12 dining-item" data-meals="lunch dinner"><article class="wire-box d-md-flex justify-content-between align-items-center"><div><h2>Campus Cafe</h2><p>Hours • Location • Sandwiches, drinks, and snacks</p></div><button class="button-box menu-button" data-title="Campus Cafe" type="button">View Menu</button></article></div><div class="col-12 dining-item" data-meals="dinner"><article class="wire-box d-md-flex justify-content-between align-items-center"><div><h2>Grab-and-Go</h2><p>Hours • Location • Quick meals and packaged options</p></div><button class="button-box menu-button" data-title="Grab-and-Go" type="button">View Menu</button></article></div></div>
-<section class="wire-box mt-4"><h2>Campus Map / Location API</h2><div class="map-placeholder">[Map placeholder with dining locations marked]</div></section></main><footer class="site-footer mt-4"><div class="container py-3">Footer | About • Contact • Accessibility</div></footer></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Campus Life App | Dining</title>
+
+  <!-- This code connects Bootstrap for responsive page layout. -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <!-- This code connects the custom stylesheet. -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- This code loads JavaScript after the HTML is parsed. -->
+  <script src="js/script.js" defer></script>
+</head>
+
+<body>
+
+  <!-- This code creates the website header and navigation. -->
+  <header class="site-header">
+    <div class="container py-3 d-flex flex-wrap justify-content-between align-items-center gap-3">
+
+      <!-- This code displays the Campus Life logo and links to Home. -->
+      <a class="brand" href="index.html">
+        <img src="images/campus-logo.png" alt="Campus Life logo">
+        <span>CAMPUS LIFE</span>
+      </a>
+
+      <!-- This code creates navigation links to each website page. -->
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-box" href="index.html">Home</a>
+        <a class="nav-box" href="events.html">Events</a>
+        <a class="nav-box active" aria-current="page" href="dining.html">Dining</a>
+        <a class="nav-box" href="studying.html">Studying</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- This code contains the main dining page content. -->
+  <main class="container py-4">
+
+    <!-- This code introduces the purpose of the dining page. -->
+    <section class="wire-box mb-4">
+      <h1>Dining</h1>
+      <p class="muted mb-0">
+        Purpose: Help students find dining locations, hours, menus, and campus food options.
+      </p>
+    </section>
+
+    <!-- This code creates a form for searching dining options and meal types. -->
+    <section class="wire-box mb-4">
+      <h2>Dining Options</h2>
+
+      <form id="dining-search-form" class="row g-2 align-items-end">
+
+        <div class="col-md-6">
+          <label class="form-label" for="dining-search">
+            Search dining spots
+          </label>
+          <input
+            id="dining-search"
+            class="form-control"
+            type="search"
+            placeholder="Search by name or menu"
+          >
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label" for="meal-type">Meal type</label>
+          <select id="meal-type" class="form-select">
+            <option value="all">All meals</option>
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+          </select>
+        </div>
+
+        <div class="col-md-2">
+          <button class="button-box w-100" type="submit">Search</button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- This code displays sample dining locations and their food options. -->
+    <div id="dining-list" class="row g-3">
+
+      <div class="col-12 dining-item" data-meals="breakfast lunch">
+        <article class="wire-box d-md-flex justify-content-between align-items-center">
+          <div>
+            <h2>Dining Hall</h2>
+            <p class="mb-md-0">Hours • Location • Menu preview: [Add details]</p>
+          </div>
+
+          <button
+            class="button-box menu-button"
+            data-title="Dining Hall"
+            type="button"
+          >
+            View Menu
+          </button>
+        </article>
+      </div>
+
+      <div class="col-12 dining-item" data-meals="lunch dinner">
+        <article class="wire-box d-md-flex justify-content-between align-items-center">
+          <div>
+            <h2>Campus Cafe</h2>
+            <p class="mb-md-0">Hours • Location • Sandwiches, drinks, and snacks</p>
+          </div>
+
+          <button
+            class="button-box menu-button"
+            data-title="Campus Cafe"
+            type="button"
+          >
+            View Menu
+          </button>
+        </article>
+      </div>
+
+      <div class="col-12 dining-item" data-meals="dinner">
+        <article class="wire-box d-md-flex justify-content-between align-items-center">
+          <div>
+            <h2>Grab-and-Go</h2>
+            <p class="mb-md-0">Hours • Location • Quick meals and packaged options</p>
+          </div>
+
+          <button
+            class="button-box menu-button"
+            data-title="Grab-and-Go"
+            type="button"
+          >
+            View Menu
+          </button>
+        </article>
+      </div>
+
+    </div>
+
+    <!-- This code reserves space for a future campus map or location API. -->
+    <section class="wire-box mt-4">
+      <h2>Campus Map / Location API</h2>
+
+      <div class="map-placeholder">
+        [Map placeholder with dining locations marked]
+      </div>
+    </section>
+
+  </main>
+
+  <!-- This code creates the website footer. -->
+  <footer class="site-footer mt-4">
+    <div class="container py-3">
+      Footer | About • Contact • Accessibility
+    </div>
+  </footer>
+
+</body>
+</html>

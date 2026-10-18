@@ -1,11 +1,165 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css"><script src="js/script.js" defer></script><title>Campus Life App | Studying</title></head><body><header class="site-header"><div class="container py-3 d-flex flex-wrap justify-content-between align-items-center gap-3">
-<a class="brand" href="index.html">[LOGO] CAMPUS LIFE</a><nav class="main-nav" aria-label="Main navigation">
-<a class="nav-box "  href="index.html">Home</a><a class="nav-box "  href="events.html">Events</a><a class="nav-box "  href="dining.html">Dining</a><a class="nav-box active" aria-current="page" href="studying.html">Studying</a>
-</nav></div></header><main class="container py-4">
-<section class="wire-box mb-4"><h1>Studying</h1><p class="muted">Purpose: Help students find study spaces, facilities, and building locations.</p></section>
-<section class="wire-box mb-4"><h2>Find a Place to Study</h2><form id="study-search-form" class="row g-2 align-items-end"><div class="col-md-6"><label class="form-label" for="study-search">Search study spots / buildings</label><input id="study-search" class="form-control" type="search" placeholder="Search study locations"></div><div class="col-md-3"><label class="form-label" for="study-type">Study type</label><select id="study-type" class="form-select"><option value="all">All spaces</option><option value="quiet">Quiet</option><option value="group">Group</option></select></div><div class="col-md-3"><button class="button-box w-100">Search</button></div></form></section>
-<div id="study-list" class="row g-3"><div class="col-12 study-item" data-type="quiet"><article class="wire-box d-md-flex justify-content-between align-items-center"><div><h2>Library Quiet Floor</h2><p>Building • Quiet • Tables, outlets, Wi-Fi</p></div><button class="button-box location-button" data-title="Library Quiet Floor" type="button">View Location</button></article></div><div class="col-12 study-item" data-type="group"><article class="wire-box d-md-flex justify-content-between align-items-center"><div><h2>Group Study Room</h2><p>Building • Group • Whiteboard and group table</p></div><button class="button-box location-button" data-title="Group Study Room" type="button">View Location</button></article></div><div class="col-12 study-item" data-type="quiet"><article class="wire-box d-md-flex justify-content-between align-items-center"><div><h2>Student Center Study Area</h2><p>Building • Quiet • Seating, outlets, Wi-Fi</p></div><button class="button-box location-button" data-title="Student Center Study Area" type="button">View Location</button></article></div></div>
-<section class="wire-box mt-4"><h2>Campus Map / Building Locations</h2><div class="map-placeholder">[Map placeholder with study locations marked]</div></section></main><footer class="site-footer mt-4"><div class="container py-3">Footer | About • Contact • Accessibility</div></footer></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Campus Life App | Studying</title>
+
+  <!-- This code connects Bootstrap for responsive page layout. -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <!-- This code connects the custom stylesheet. -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- This code loads JavaScript after the HTML is parsed. -->
+  <script src="js/script.js" defer></script>
+</head>
+
+<body>
+
+  <!-- This code creates the website header and navigation. -->
+  <header class="site-header">
+    <div class="container py-3 d-flex flex-wrap justify-content-between align-items-center gap-3">
+
+      <!-- This code displays the Campus Life logo and links to Home. -->
+      <a class="brand" href="index.html">
+        <img src="images/campus-logo.png" alt="Campus Life logo">
+        <span>CAMPUS LIFE</span>
+      </a>
+
+      <!-- This code creates navigation links to each website page. -->
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-box" href="index.html">Home</a>
+        <a class="nav-box" href="events.html">Events</a>
+        <a class="nav-box" href="dining.html">Dining</a>
+        <a class="nav-box active" aria-current="page" href="studying.html">Studying</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- This code contains the main studying page content. -->
+  <main class="container py-4">
+
+    <!-- This code introduces the purpose of the studying page. -->
+    <section class="wire-box mb-4">
+      <h1>Studying</h1>
+      <p class="muted mb-0">
+        Purpose: Help students find study spaces, facilities, and building locations.
+      </p>
+    </section>
+
+    <!-- This code creates a form for searching and filtering study spaces. -->
+    <section class="wire-box mb-4">
+      <h2>Find a Place to Study</h2>
+
+      <form id="study-search-form" class="row g-2 align-items-end">
+
+        <div class="col-md-6">
+          <label class="form-label" for="study-search">
+            Search study spots / buildings
+          </label>
+          <input
+            id="study-search"
+            class="form-control"
+            type="search"
+            placeholder="Search study locations"
+          >
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label" for="study-type">Study type</label>
+          <select id="study-type" class="form-select">
+            <option value="all">All spaces</option>
+            <option value="quiet">Quiet</option>
+            <option value="group">Group</option>
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <button class="button-box w-100" type="submit">Search</button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- This code displays sample study locations and their features. -->
+    <div id="study-list" class="row g-3">
+
+      <div class="col-12 study-item" data-type="quiet">
+        <article class="wire-box d-md-flex justify-content-between align-items-center">
+          <div>
+            <h2>Library Quiet Floor</h2>
+            <p class="mb-md-0">Building • Quiet • Tables, outlets, Wi-Fi</p>
+          </div>
+
+          <button
+            class="button-box location-button"
+            data-title="Library Quiet Floor"
+            type="button"
+          >
+            View Location
+          </button>
+        </article>
+      </div>
+
+      <div class="col-12 study-item" data-type="group">
+        <article class="wire-box d-md-flex justify-content-between align-items-center">
+          <div>
+            <h2>Group Study Room</h2>
+            <p class="mb-md-0">Building • Group • Whiteboard and group table</p>
+          </div>
+
+          <button
+            class="button-box location-button"
+            data-title="Group Study Room"
+            type="button"
+          >
+            View Location
+          </button>
+        </article>
+      </div>
+
+      <div class="col-12 study-item" data-type="quiet">
+        <article class="wire-box d-md-flex justify-content-between align-items-center">
+          <div>
+            <h2>Student Center Study Area</h2>
+            <p class="mb-md-0">Building • Quiet • Seating, outlets, Wi-Fi</p>
+          </div>
+
+          <button
+            class="button-box location-button"
+            data-title="Student Center Study Area"
+            type="button"
+          >
+            View Location
+          </button>
+        </article>
+      </div>
+
+    </div>
+
+    <!-- This code reserves space for a future campus map. -->
+    <section class="wire-box mt-4">
+      <h2>Campus Map / Building Locations</h2>
+
+      <div class="map-placeholder">
+        [Map placeholder with study locations marked]
+      </div>
+    </section>
+
+  </main>
+
+  <!-- This code creates the website footer. -->
+  <footer class="site-footer mt-4">
+    <div class="container py-3">
+      Footer | About • Contact • Accessibility
+    </div>
+  </footer>
+
+</body>
+</html>
