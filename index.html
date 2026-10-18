@@ -2,9 +2,18 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css"><script src="js/script.js" defer></script><title>Campus Life App | Home</title></head><body><header class="site-header"><div class="container py-3 d-flex flex-wrap justify-content-between align-items-center gap-3">
-<a class="brand" href="index.html">[LOGO] CAMPUS LIFE</a><nav class="main-nav" aria-label="Main navigation">
-<a class="nav-box active" aria-current="page" href="index.html">Home</a><a class="nav-box "  href="events.html">Events</a><a class="nav-box "  href="dining.html">Dining</a><a class="nav-box "  href="studying.html">Studying</a>
-</nav></div></header><main class="container py-4">
+    <!-- This code displays the Campus Life logo and links to the homepage. -->
+<a class="brand" href="index.html">
+  <img src="images/campus-logo.png" alt="Campus Life logo">
+  <span>CAMPUS LIFE</span>
+</a>
+<!-- This code creates navigation links to each website page. -->
+<nav class="main-nav" aria-label="Main navigation">
+  <a class="nav-box active" aria-current="page" href="index.html">Home</a>
+  <a class="nav-box" href="events.html">Events</a>
+  <a class="nav-box" href="dining.html">Dining</a>
+  <a class="nav-box" href="studying.html">Studying</a>
+</nav>
 <section class="wire-box welcome-box mb-4"><h1>Home / Dashboard</h1><p>Welcome to Campus Life App</p><p class="muted mb-0">One starting point for campus events, dining, and places to study.</p></section>
 <section class="wire-box mb-4"><h2>Welcome / Campus Announcements</h2><p>[Text placeholder for welcome message or campus update]</p><div id="announcement-content" class="api-panel" aria-live="polite">Loading sample announcement...</div><p class="small muted mb-0">Demo content from JSONPlaceholder, not a real campus announcement.</p></section>
 <div class="row g-3 mb-4"><div class="col-md-4"><section class="wire-box h-100"><h2>Events</h2><p>[Event preview • date • time]</p><a class="button-box" href="events.html">Browse Events</a></section></div><div class="col-md-4"><section class="wire-box h-100"><h2>Dining</h2><p>[Dining spot • menu preview]</p><a class="button-box" href="dining.html">Explore Dining</a></section></div><div class="col-md-4"><section class="wire-box h-100"><h2>Studying</h2><p>[Suggested study location]</p><a class="button-box" href="studying.html">Find Study Spots</a></section></div></div>
