@@ -1,0 +1,19 @@
+/* Simple gray-and-white styling based on the project wireframe. */
+:root{--white:#fff;--light:#f4f4f4;--mid:#d5d5d5;--line:#969696;--dark:#333;--muted:#666}
+body{background:var(--white);color:var(--dark);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+.site-header,.site-footer{background:var(--light);border-bottom:1px solid var(--mid)}
+.site-footer{border-top:1px solid var(--mid);border-bottom:0;color:var(--muted);font-size:.9rem}
+.brand{color:var(--dark);font-weight:700;text-decoration:none}
+.main-nav{display:flex;flex-wrap:wrap;gap:.4rem}
+.nav-box,.button-box{display:inline-block;padding:.45rem .8rem;border:1px solid var(--line);border-radius:2px;background:#fff;color:var(--dark);text-align:center;text-decoration:none;cursor:pointer}
+.nav-box:hover,.nav-box:focus,.button-box:hover,.button-box:focus{background:var(--light);color:#111;outline-offset:2px}
+.nav-box.active{background:var(--mid);font-weight:700}
+.wire-box{border:1px solid var(--line);padding:1rem;background:#fff;border-radius:2px}
+.welcome-box{background:var(--light)}
+h1{font-size:clamp(1.5rem,2.5vw,2rem)}h2{font-size:1.15rem}
+.muted,.small{color:var(--muted)}
+.api-panel,.image-placeholder,.map-placeholder{border:1px dashed var(--line);background:var(--light);padding:.8rem}
+.image-placeholder,.map-placeholder{display:flex;align-items:center;justify-content:center;text-align:center;min-height:100px;color:var(--muted)}
+.map-placeholder{min-height:150px}
+.form-control,.form-select{border-color:var(--line);border-radius:2px}
+@media(max-width:576px){.main-nav{width:100%}.nav-box{flex:1 1 calc(50% - .4rem)}}

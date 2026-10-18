@@ -1,0 +1,11 @@
+
+# Exclude private environment files.
+.env
+.env.*
+
+# Exclude dependency folders.
+node_modules/
+
+# Exclude operating system files.
+.DS_Store
+Thumbs.db
