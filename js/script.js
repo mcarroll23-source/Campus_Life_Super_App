@@ -1,6 +1,7 @@
 /* This code starts the website features after the page content loads. */
 document.addEventListener("DOMContentLoaded", () => {
   loadAnnouncement();
+  loadWeather();
   setupEventSearch();
   setupDiningSearch();
   setupStudySearch();
@@ -38,6 +39,69 @@ async function loadAnnouncement() {
       "Sample announcement could not be loaded. Please try again later.";
 
     console.error("Announcement loading error:", error);
+  }
+}
+
+/* This code loads current weather from the Open-Meteo API. */
+async function loadWeather() {
+  const box = document.querySelector("#weather-content");
+
+  if (!box) {
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      "https://api.open-meteo.com/v1/forecast?latitude=33.653&longitude=-112.186&current=temperature_2m,weather_code,wind_speed_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FPhoenix"
+    );
+
+    if (!response.ok) {
+      throw new Error("Weather request failed");
+    }
+
+    const data = await response.json();
+    const weather = data.current;
+
+    if (!weather) {
+      throw new Error("Weather data is missing");
+    }
+
+    /* This code converts weather codes into readable descriptions. */
+    const descriptions = {
+      0: "Clear sky",
+      1: "Mainly clear",
+      2: "Partly cloudy",
+      3: "Overcast",
+      45: "Foggy",
+      48: "Foggy",
+      51: "Light drizzle",
+      53: "Drizzle",
+      55: "Heavy drizzle",
+      61: "Light rain",
+      63: "Rain",
+      65: "Heavy rain",
+      71: "Light snow",
+      73: "Snow",
+      75: "Heavy snow",
+      80: "Rain showers",
+      81: "Rain showers",
+      82: "Heavy rain showers",
+      95: "Thunderstorm",
+      96: "Thunderstorm with hail",
+      99: "Thunderstorm with heavy hail"
+    };
+
+    const condition =
+      descriptions[weather.weather_code] || "Conditions unavailable";
+
+    /* This code displays the current weather information. */
+    box.textContent =
+      `Glendale, Arizona: ${weather.temperature_2m}°F (${condition}), wind ${weather.wind_speed_10m} mph.`;
+  } catch (error) {
+    box.textContent =
+      "Current weather is unavailable. Please try again later.";
+
+    console.error("Weather loading error:", error);
   }
 }
 
