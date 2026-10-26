@@ -15,26 +15,31 @@ async function loadAnnouncement() {
     return;
   }
 
+  box.textContent = "Loading sample announcement...";
+
   try {
     const response = await fetch(
       "https://jsonplaceholder.typicode.com/posts/1"
     );
 
     if (!response.ok) {
-      throw new Error("Request failed");
+      throw new Error("Announcement request failed");
     }
 
     const data = await response.json();
+
+    if (!data.title) {
+      throw new Error("Announcement title is missing");
+    }
+
     box.textContent = data.title;
   } catch (error) {
     box.textContent =
-      "Sample announcement unavailable. A real campus announcement feed can be connected later.";
+      "Sample announcement could not be loaded. Please try again later.";
 
-    console.error(error);
+    console.error("Announcement loading error:", error);
   }
 }
-
-
 
 /* This code handles common search and filtering features for campus pages. */
 function setupCardSearch(
