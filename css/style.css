@@ -69,15 +69,26 @@ body {
   cursor: pointer;
 }
 
+
 /* This code changes the link and button appearance when selected or hovered over. */
 .nav-box:hover,
-.nav-box:focus,
+.nav-box:focus-visible,
 .button-box:hover,
-.button-box:focus {
+.button-box:focus-visible {
   background: var(--light);
   color: #111111;
+  outline: 2px solid var(--dark);
   outline-offset: 2px;
 }
+
+/* This code gives navigation links comfortable touch targets. */
+.nav-box {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 /* This code highlights the navigation link for the current page. */
 .nav-box.active {
