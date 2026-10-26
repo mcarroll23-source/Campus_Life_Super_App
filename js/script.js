@@ -34,67 +34,9 @@ async function loadAnnouncement() {
   }
 }
 
-/* This code lets users search events and filter them by category. */
-function setupEventSearch() {
-  const form = document.querySelector("#event-search-form");
 
-  if (!form) {
-    return;
-  }
 
-  const input = document.querySelector("#event-search");
-  const category = document.querySelector("#event-category");
-  const status = document.querySelector("#event-status");
-  const clearButton = document.querySelector("#clear-event-search");
-
-  /* This code displays only events that match the search and category. */
-  function filterEvents() {
-    let count = 0;
-
-    document.querySelectorAll(".event-item").forEach((card) => {
-      const searchMatches = card.textContent
-        .toLowerCase()
-        .includes(input.value.toLowerCase().trim());
-
-      const categoryMatches =
-        category.value === "all" ||
-        card.dataset.category === category.value;
-
-      const showCard = searchMatches && categoryMatches;
-
-      card.classList.toggle("d-none", !showCard);
-
-      if (showCard) {
-        count++;
-      }
-    });
-
-    if (status) {
-      status.textContent =
-        `Showing ${count} sample event(s); these are not live campus listings.`;
-    }
-  }
-
-  /* This code runs the event filter when the form is submitted. */
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    filterEvents();
-  });
-
-  /* This code updates the event list when the category changes. */
-  category.addEventListener("change", filterEvents);
-
-  /* This code resets the event search and shows all categories. */
-  if (clearButton) {
-    clearButton.addEventListener("click", () => {
-      input.value = "";
-      category.value = "all";
-      filterEvents();
-    });
-  }
-}
-
-/* This code handles common search and filtering features for dining and study pages. */
+/* This code handles common search and filtering features for campus pages. */
 function setupCardSearch(
   formSelector,
   inputSelector,
@@ -102,7 +44,10 @@ function setupCardSearch(
   cardSelector,
   dataAttribute,
   itemName,
-  filterMatches
+  filterMatches,
+  clearButtonSelector = null,
+  extraMessage = "",
+  statusSelector = null
 ) {
   const form = document.querySelector(formSelector);
 
@@ -117,10 +62,22 @@ function setupCardSearch(
     return;
   }
 
-  const status = document.createElement("p");
-  status.classList.add("text-muted", "mt-2");
-  status.setAttribute("aria-live", "polite");
-  form.insertAdjacentElement("afterend", status);
+  const clearButton = clearButtonSelector
+    ? document.querySelector(clearButtonSelector)
+    : null;
+
+  let status = statusSelector
+    ? document.querySelector(statusSelector)
+    : null;
+
+  /* This code creates a status message if the page does not already have one. */
+  if (!status) {
+    status = document.createElement("p");
+    status.classList.add("text-muted", "mt-2");
+    status.setAttribute("aria-live", "polite");
+    status.setAttribute("role", "status");
+    form.insertAdjacentElement("afterend", status);
+  }
 
   /* This code displays items that match the search and selected filter. */
   function filterCards() {
@@ -153,8 +110,12 @@ function setupCardSearch(
       status.textContent =
         `No ${itemName} found. Try changing your search or filters.`;
     } else {
-      status.textContent =
-        `${count} ${itemName} found.`;
+      status.textContent = `${count} ${itemName} found.`;
+    }
+
+    /* This code adds an optional note about sample content. */
+    if (extraMessage) {
+      status.textContent += ` ${extraMessage}`;
     }
   }
 
@@ -164,12 +125,39 @@ function setupCardSearch(
     filterCards();
   });
 
-  /* This code updates the results when users type or change a filter. */
+  /* This code updates results when users type or change a filter. */
   input.addEventListener("input", filterCards);
   filter.addEventListener("change", filterCards);
 
-  /* This code displays all items when the page first loads. */
+  /* This code clears the search and resets the selected filter. */
+  if (clearButton) {
+    clearButton.addEventListener("click", () => {
+      input.value = "";
+      filter.value = "all";
+      filterCards();
+    });
+  }
+
+  /* This code displays all matching items when the page loads. */
   filterCards();
+}
+
+/* This code lets users search events and filter them by category. */
+function setupEventSearch() {
+  setupCardSearch(
+    "#event-search-form",
+    "#event-search",
+    "#event-category",
+    ".event-item",
+    "category",
+    "events",
+    (category, selectedCategory) =>
+      selectedCategory === "all" ||
+      category === selectedCategory,
+    "#clear-event-search",
+    "These are sample events, not live campus listings.",
+    "#event-status"
+  );
 }
 
 /* This code lets users search dining options and filter by meal type. */
