@@ -94,74 +94,112 @@ function setupEventSearch() {
   }
 }
 
-/* This code lets users search dining options and filter by meal type. */
-function setupDiningSearch() {
-  const form = document.querySelector("#dining-search-form");
+/* This code handles common search and filtering features for dining and study pages. */
+function setupCardSearch(
+  formSelector,
+  inputSelector,
+  filterSelector,
+  cardSelector,
+  dataAttribute,
+  itemName,
+  filterMatches
+) {
+  const form = document.querySelector(formSelector);
 
   if (!form) {
     return;
   }
 
-  const input = document.querySelector("#dining-search");
-  const mealType = document.querySelector("#meal-type");
+  const input = document.querySelector(inputSelector);
+  const filter = document.querySelector(filterSelector);
 
-  /* This code displays dining options that match the search and meal type. */
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
+  if (!input || !filter) {
+    return;
+  }
 
+  const status = document.createElement("p");
+  status.classList.add("text-muted", "mt-2");
+  status.setAttribute("aria-live", "polite");
+  form.insertAdjacentElement("afterend", status);
+
+  /* This code displays items that match the search and selected filter. */
+  function filterCards() {
     const searchTerm = input.value.toLowerCase().trim();
-    const selectedMeal = mealType.value;
+    const selectedFilter = filter.value;
+    let count = 0;
 
-    document.querySelectorAll(".dining-item").forEach((card) => {
+    document.querySelectorAll(cardSelector).forEach((card) => {
       const textMatches = card.textContent
         .toLowerCase()
         .includes(searchTerm);
 
-      const mealMatches =
-        selectedMeal === "all" ||
-        card.dataset.meals.split(" ").includes(selectedMeal);
-
-      card.classList.toggle(
-        "d-none",
-        !(textMatches && mealMatches)
+      const filterValue = card.dataset[dataAttribute] || "";
+      const selectedMatches = filterMatches(
+        filterValue,
+        selectedFilter
       );
+
+      const showCard = textMatches && selectedMatches;
+
+      card.classList.toggle("d-none", !showCard);
+
+      if (showCard) {
+        count++;
+      }
     });
+
+    /* This code tells users how many items match their search. */
+    if (count === 0) {
+      status.textContent =
+        `No ${itemName} found. Try changing your search or filters.`;
+    } else {
+      status.textContent =
+        `${count} ${itemName} found.`;
+    }
+  }
+
+  /* This code updates the results when the search form is submitted. */
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    filterCards();
   });
+
+  /* This code updates the results when users type or change a filter. */
+  input.addEventListener("input", filterCards);
+  filter.addEventListener("change", filterCards);
+
+  /* This code displays all items when the page first loads. */
+  filterCards();
+}
+
+/* This code lets users search dining options and filter by meal type. */
+function setupDiningSearch() {
+  setupCardSearch(
+    "#dining-search-form",
+    "#dining-search",
+    "#meal-type",
+    ".dining-item",
+    "meals",
+    "dining options",
+    (meals, selectedMeal) =>
+      selectedMeal === "all" ||
+      meals.split(" ").includes(selectedMeal)
+  );
 }
 
 /* This code lets users search study spaces and filter by space type. */
 function setupStudySearch() {
-  const form = document.querySelector("#study-search-form");
-
-  if (!form) {
-    return;
-  }
-
-  const input = document.querySelector("#study-search");
-  const studyType = document.querySelector("#study-type");
-
-  /* This code displays study spaces that match the search and selected type. */
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const searchTerm = input.value.toLowerCase().trim();
-    const selectedType = studyType.value;
-
-    document.querySelectorAll(".study-item").forEach((card) => {
-      const textMatches = card.textContent
-        .toLowerCase()
-        .includes(searchTerm);
-
-      const typeMatches =
-        selectedType === "all" ||
-        card.dataset.type === selectedType;
-
-      card.classList.toggle(
-        "d-none",
-        !(textMatches && typeMatches)
-      );
-    });
-  });
+  setupCardSearch(
+    "#study-search-form",
+    "#study-search",
+    "#study-type",
+    ".study-item",
+    "type",
+    "study spaces",
+    (type, selectedType) =>
+      selectedType === "all" ||
+      type === selectedType
+  );
 }
 
 /* This code sets up buttons for event details, menus, and study locations. */
